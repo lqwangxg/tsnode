@@ -10,7 +10,7 @@ services:
     depends_on:
       - pgsql
 
-
+  pgsql:
     image: postgres
     container_name: postgresql
     ports:
