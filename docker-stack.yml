@@ -2,6 +2,16 @@
 version: '3.8'
 
 services:
+  web:
+    image: lqwangxg/tsnode
+    build: .
+    command: npm start
+    volumes:
+      - .:/app
+      - ~/data/db:/data/db
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo
     restart: always
