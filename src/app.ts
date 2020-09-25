@@ -11,7 +11,12 @@ import passport from "passport";
 import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
+//import Rediser from "./util/redis";
+import Redis from "redis"
 const MongoStore = mongo(session);
+const redis = new Redis();
+redis.echo("uid");
+
 
 // Controllers (route handlers)
 import * as homeController from "./controllers/home";
@@ -41,6 +46,8 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useUni
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
+app.set("redis", redis);
+
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
