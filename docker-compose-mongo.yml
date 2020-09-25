@@ -6,6 +6,8 @@ services:
     image: mongo
     #ports:
     #  - 27017:27017 
+    volumes:
+      - ~/data/redis:/data
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -17,14 +19,24 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+  redis:
+    image: lqwangxg/redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ~/data/redis:/data
+
   webapp:
     image: lqwangxg/node
     volumes:
       - ~/data/db:/data/db
+      - ~/data/redis:/data
       - ~/tsnode:/app
     command: npm start
     ports:
       - 3000:3000
     depends_on:
       - mongo
+      - redis
 
