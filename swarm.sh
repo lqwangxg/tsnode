@@ -1,5 +1,5 @@
 # check pattern before run service.
-stack_yml=docker-stack-mongo.yml
+stack_yml=docker-compose-mongo.yml
 stack_name=mongo
 if [ $1 = 'swarm' ]; then 
   # Method1: run docker service by docker-stack.yml
