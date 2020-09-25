@@ -2,21 +2,10 @@
 version: '3.8'
 
 services:
-  web:
-    image: lqwangxg/tsnode
-    build: .
-    ports:
-      - 80:80
-    volumes:
-      - .:/app
-      - ~/data/db:/data/db
-    depends_on:
-      - mongo
-
   mongo:
     image: mongo
-    ports:
-      - 27017:27017 
+    #ports:
+    #  - 27017:27017 
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
