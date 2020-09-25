@@ -6,7 +6,7 @@ echo "app_name root path:$app_name"
 
 ./install.sh 2>&1 | tee install.log | grep -i error
  
-if [ $? = 1 ]; then 
+if [ $? = 0 ]; then 
   docker run -it --rm \
     -w /app \
     -v $app_name:/app \
@@ -14,7 +14,7 @@ if [ $? = 1 ]; then
     $builder_name \
     npm run build 2>&1 | tee build.log | grep -i error
   
-  if [ $? = 1 ]; then 
+  if [ $? = 0 ]; then 
     echo "npm run build completed."
   else
     echo "npm run build error happened."
@@ -23,7 +23,7 @@ else
   echo "npm install error happened."
 fi
 
-if [ $? = 1 ]; then  
+if [ $? = 0 ]; then  
   echo "---deploy start...----"
   ./deploy.sh
 fi
