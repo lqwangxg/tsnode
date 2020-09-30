@@ -16,7 +16,7 @@ elif [ $1 = 'compose' ]; then
  docker-compose -d -f $stack_yml up  
 
 elif [ $1 = 'stop' ]; then
- docker-compose ls | grep -i "$stack_name"
+ docker-compose ps | grep -i "$stack_name"
  if [ $? = 0 ]; then 
    docker-compose down
  else
